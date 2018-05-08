@@ -1,0 +1,40 @@
+version: "3.3"
+services:
+#  movie-service:
+#    image: nkavtur/movie-service:latest
+#    ports:
+#      - "8080:8080"
+#    restart: on-failure
+#    depends_on:
+#      - db
+#    networks:
+#      - microcs-demo-net
+  db:
+    image: postgres
+    environment:
+      - POSTGRES_PASSWORD=adminPassword
+    deploy:
+      replicas: 1
+    ports:
+      - "5432:5432"
+    networks:
+      - microcs-demo-net
+    volumes:
+      - db_data:/var/lib/postgresql/data
+  pgadmin:
+    image: chorss/docker-pgadmin4
+    networks:
+      - microcs-demo-net
+    deploy:
+      replicas: 1
+    ports:
+      - "5050:5050"
+    volumes:
+      - pg_admin_data:/pgadmin/
+networks:
+  microcs-demo-net:
+    driver: overlay
+    attachable: true
+volumes:
+  db_data :
+  pg_admin_data:

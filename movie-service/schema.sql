@@ -1,0 +1,7 @@
+CREATE SCHEMA movies IF NOT EXISTS;
+
+CREATE TABLE IF NOT EXISTS movies.movie (
+  movie_guid UUID PRIMARY KEY,
+  "name" VARCHAR(30) NOT NULL,
+  "data" DATE NOT NULL
+);
